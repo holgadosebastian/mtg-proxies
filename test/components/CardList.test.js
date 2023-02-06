@@ -1,12 +1,19 @@
 import React from "react"
 import { render } from "@testing-library/react"
-import { element } from "../reactTestExtensions"
+import { element, elements } from "../reactTestExtensions"
 import { CardList } from "../../src/components/CardList"
 
 describe("CardList", () => {
+  const firstCard = () => elements("#CardList .card")[0]
+
   it("renders a main container", () => {
     render(<CardList />)
     expect(element("#CardList")).not.toBeNull()
+  })
+
+  it("renders a card element", () => {
+    render(<CardList />)
+    expect(firstCard()).not.toBeNull()
   })
 
   describe("add new card button", () => {
