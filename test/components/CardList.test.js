@@ -2,18 +2,48 @@ import React from "react"
 import { render } from "@testing-library/react"
 import { element, elements } from "../reactTestExtensions"
 import { CardList } from "../../src/components/CardList"
+import { Card } from "../../src/components/Card"
+
+jest.mock("../../src/components/Card", () => ({
+  Card: jest.fn(() => <div className="card" />),
+}))
+
+const oneCard = [
+  {
+    id: 1,
+    name: "a",
+    image: "b",
+  },
+]
+
+const twoCards = [
+  ...oneCard,
+  {
+    id: 2,
+    name: "c",
+    image: "d",
+  },
+]
 
 describe("CardList", () => {
-  const firstCard = () => elements("#CardList .card")[0]
-
   it("renders a main container", () => {
     render(<CardList />)
     expect(element("#CardList")).not.toBeNull()
   })
 
   it("renders a card element", () => {
-    render(<CardList />)
-    expect(firstCard()).not.toBeNull()
+    render(<CardList cards={oneCard} />)
+    expect(Card.mock.calls.length).toEqual(1)
+  })
+
+  it("renders no card element when array is empty", () => {
+    render(<CardList cards={[]} />)
+    expect(Card.mock.calls.length).toEqual(0)
+  })
+
+  it("renders more than one card", () => {
+    render(<CardList cards={twoCards} />)
+    expect(Card.mock.calls.length).toEqual(2)
   })
 
   describe("add new card button", () => {

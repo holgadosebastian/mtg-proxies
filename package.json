@@ -34,6 +34,8 @@
     "webpack-dev-server": "^4.11.1"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "clearMocks": true,
+    "restoreMocks": true
   }
 }
