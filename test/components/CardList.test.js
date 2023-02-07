@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "@testing-library/react"
-import { element, elements } from "../reactTestExtensions"
+import { element } from "../reactTestExtensions"
 import { CardList } from "../../src/components/CardList"
 import { Card } from "../../src/components/Card"
 
