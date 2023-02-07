@@ -1,12 +1,12 @@
 import React from "react"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { element, click } from "../reactTestExtensions"
 import { Card } from "../../src/components/Card"
 
 describe("CardList.Card", () => {
   const testProps = {
     id: 1,
-    name: "a",
+    name: "card name",
     image: "http://abe.jpg/",
   }
 
@@ -20,6 +20,11 @@ describe("CardList.Card", () => {
   it("adds the src of the image from the image prop", () => {
     render(<Card {...testProps} />)
     expect(element("img").src).toEqual(testProps.image)
+  })
+
+  it("displays a name", () => {
+    render(<Card {...testProps} />)
+    expect(screen.getByText(testProps.name)).not.toBeNull()
   })
 
   describe("duplicate button", () => {
