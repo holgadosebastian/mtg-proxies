@@ -46,6 +46,12 @@ describe("CardList", () => {
     expect(Card.mock.calls.length).toEqual(2)
   })
 
+  it("passes name and image props to Card component", () => {
+    const { image, name } = oneCard[0]
+    render(<CardList cards={oneCard} />)
+    expect(Card).toHaveBeenCalledWith(expect.objectContaining({ image, name }), expect.anything())
+  })
+
   describe("add new card button", () => {
     const addNewCardButton = () => element("#AddNewCard")
 
